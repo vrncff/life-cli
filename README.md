@@ -3,7 +3,9 @@ life-cli
 
 A terminal-based implementation of Conway's Game of Life written in Python. It simulates the classic cellular automaton in a toroidal grid and includes an interactive editor mode for creating custom patterns directly in the terminal.
 
-![Gif Demo](demo.gif)
+<p align="center">
+  <img alt="Gif demo." src="demo.gif">
+</p>
 
 Features
 ========
