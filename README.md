@@ -57,6 +57,6 @@ The project is structured to separate mathematical logic from state management a
 To-Do
 =====
 
-- [ ] Add an interactive menu to spawn predefined patterns into the grid.
+- [x] Spawn predefined patterns into the grid.
 - [ ] Load initial grid states from a text file.
 - [ ] Make the grid dimensions adjustable

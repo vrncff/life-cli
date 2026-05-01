@@ -4,6 +4,7 @@ Simulation engine.
 Manages state, timing and interaction between core logic and UI.
 """
 import core
+import patterns
 
 class LifeEngine:
     """
@@ -23,6 +24,9 @@ class LifeEngine:
         self.editor_mode = False
         self.cursor_row = 0
         self.cursor_col = 0
+
+        self.available_patterns = list(patterns.PATTERNS.items())
+        self.current_pattern_idx = 0
 
         self.tick_interval = .15
 
@@ -50,7 +54,10 @@ class LifeEngine:
         self.editor_mode = not self.editor_mode
 
     def toggle_cursor_cell(self):
-        self.toggle_cell(self.cursor_row, self.cursor_col)
+        self.toggle_cells(self.cursor_row, self.cursor_col)
+
+    def cycle_pattern(self, direction = 1): # +1 goes forward on list
+        self.current_pattern_idx = (self.current_pattern_idx + direction) % len(self.available_patterns)
 
     # Grid management
     def set_random(self, alive_prob=0.3):
@@ -62,24 +69,24 @@ class LifeEngine:
         self.generation = 0
 
     # Grid editing
-    def toggle_cell(self, row, col):
-        self.grid[row][col] ^= 1
+    def toggle_cells(self, row, col):
+        pattern = self.available_patterns[self.current_pattern_idx][1]
 
-    def set_pattern(self, pattern, top=0, left=0): # patterns as in patterns.py
-        """
-        Apply a predefined pattern at position (top,left)  with toroidal wrapping.
+        for dr, dc in pattern:
+            r = (row + dr) % self.height
+            c = (col + dc) % self.width
+    
+            self.grid[r][c] ^= 1
 
-        Pattern must be an iterable of (dr,dc) relative coordinates.
-        """
-        if not pattern:
-            return
-    
-        for r, c in pattern:
-            rr = (r + top) % self.height
-            cc = (c + left) % self.width
-    
-            self.grid[rr][cc] = 1
+    def rotate_pattern(self):
+        name, coords = self.available_patterns[self.current_pattern_idx]
+        rotated_coords = [(dc, -dr) for dr, dc in coords]
+
+        self.available_patterns[self.current_pattern_idx] = (name, rotated_coords)
 
     def move_cursor(self, dr, dc):
         self.cursor_row = (self.cursor_row + dr) % self.height
         self.cursor_col = (self.cursor_col + dc) % self.width
+
+    def get_current_pattern(self):
+        return self.available_patterns[self.current_pattern_idx][1]
