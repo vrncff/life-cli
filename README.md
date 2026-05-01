@@ -23,7 +23,7 @@ This application uses `sys.stdin`, `tty` and `termios` and thus runs natively on
 ```bash
 git clone https://github.com/vrncff/life-cli.git
 cd life-cli
-python main.py
+python main.py # For custom grid size, use flags -W and -H, default is 60x15.
 ```
 
 Controls
@@ -40,7 +40,9 @@ Controls
 **Editor mode:** 
 
 - h, j, k, l: Move cursor (left, down, up, right)
-- SPACE: Toggle the current cell (alive/dead)
+- SPACE: Toggle the current cells (alive/dead)
+- a,s: Select previous/next pattern
+- r: Rotate current pattern
 - e: Exit editor mode
 - q: Quit
 
@@ -58,5 +60,5 @@ To-Do
 =====
 
 - [x] Spawn predefined patterns in the grid.
+- [x] Make the grid dimensions adjustable
 - [ ] Load initial grid states from a text file.
-- [ ] Make the grid dimensions adjustable
