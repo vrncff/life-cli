@@ -23,7 +23,21 @@ This application uses `sys.stdin`, `tty` and `termios` and thus runs natively on
 ```bash
 git clone https://github.com/vrncff/life-cli.git
 cd life-cli
-python main.py # For custom grid size, use flags -W and -H, default is 60x15.
+python main.py
+```
+
+You can view all available arguments by running `python main.py --help`:
+
+```
+usage: main.py [-h] [-W WIDTH] [-H HEIGHT] [-i INPUT]
+
+A terminal-based implementation of Conway's Game of Life.
+
+options:
+  -h, --help            show this help message and exit
+  -W, --width WIDTH     Width of the grid. Defaults to CSV width if provided, else 60
+  -H, --height HEIGHT   Height of the grid. Defaults to CSV height if provided, else 15
+  -i, --input INPUT     Path to a CSV file representing the initial grid state (0s and 1s)
 ```
 
 Controls
@@ -61,4 +75,4 @@ To-Do
 
 - [x] Spawn predefined patterns in the grid.
 - [x] Make the grid dimensions adjustable
-- [ ] Load initial grid states from a text file.
+- [x] Load initial grid states from a text file.

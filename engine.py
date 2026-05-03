@@ -60,6 +60,19 @@ class LifeEngine:
         self.current_pattern_idx = (self.current_pattern_idx + direction) % len(self.available_patterns)
 
     # Grid management
+    def load_matrix(self, matrix):
+        self.clear_grid()
+
+        for r, row in enumerate(matrix):
+            for c, val in enumerate(row):
+                if val not in (0,1):
+                    raise ValueError("Input matrix should have only 0 and 1 values.")
+
+                # wrap around
+                rr = r % self.height
+                cc = c % self.width
+                self.grid[rr][cc] = val
+
     def set_random(self, alive_prob=0.3):
         self.grid = core.create_random(self.width, self.height, alive_prob)
         self.generation = 0
